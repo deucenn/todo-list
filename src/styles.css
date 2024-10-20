@@ -1,0 +1,82 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* Root Variable Declaration */
+:root {
+  --orange: #a08437;
+  --dark: #181818;
+  --lightdark: #1f1f1f; 
+  --hover: #3a3a3a;
+  --light: #e0e0e0;
+  --darkerlight: #919191;
+  --red: #ff1504;
+  --golden: #c59d5f;
+  --goldenlight: #e6b771;
+  --border-radius: 8px;
+  --spacing-md: 15px;
+  --spacing-lg: 20px;
+  --spacing-xl: 40px;
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+body {
+  overflow: hidden;
+  display: flex;
+  display: grid;
+  background-position: center;
+  background: var(--dark)
+}
+
+/* Navbar */
+.navbar {
+    background: var(--lightdark);
+    height: 100vh;
+    width: 12vw;
+    border-right: 1px solid var(--darkerlight);
+}
+
+.app-name {
+    color: var(--light);
+    text-align: left;
+    margin-left: 20px;
+    font-weight: 400;
+    font-size: large;
+    margin-bottom: 40px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    color: var(--darkerlight);
+    margin-left: 10px;
+    padding-left: 10px;
+    cursor: pointer;
+    margin-right: 20px;
+    transition: 0.2s;
+}
+
+.nav-item:hover {
+    background: var(--hover);
+    border-radius: 5px;
+}
+
+.delete-button {
+    display: none;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.nav-item:hover .delete-button {
+    display: block;
+}
