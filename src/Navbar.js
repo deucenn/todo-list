@@ -15,15 +15,17 @@ function renderNavbar() {
   navProject.textContent = "Project";
   navbar.appendChild(navProject);
 
-  const deleteButton = document.createElement("button");
-  deleteButton.classList.add("delete-button");
-  const deleteIcon = document.createElement("img");
-  deleteIcon.src = "./assets/deleteBtn.svg"; // Path to your SVG in the assets folder
-  console.log(deleteIcon.src); // This will show the fully constructed path in the console
-  deleteIcon.classList.add("delete-icon"); // Add a class for custom styling
 
-  deleteButton.appendChild(deleteIcon);
-  navProject.appendChild(deleteButton);
+  // TODO: fix the delete button
+  // const deleteButton = document.createElement("button");
+  // deleteButton.classList.add("delete-button");
+  // const deleteIcon = document.createElement("img");
+  // deleteIcon.src = "./assets/deleteBtn.svg"; // Path to your SVG in the assets folder
+  // console.log(deleteIcon.src); // This will show the fully constructed path in the console
+  // deleteIcon.classList.add("delete-icon"); // Add a class for custom styling
+
+  // deleteButton.appendChild(deleteIcon);
+  // navProject.appendChild(deleteButton);
 }
 
 export { renderNavbar };
