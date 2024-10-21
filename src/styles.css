@@ -36,6 +36,11 @@ body {
   background: var(--dark)
 }
 
+.content {
+    display: flex;
+    height: 100vh;
+}
+
 /* Navbar */
 .navbar {
     background: var(--lightdark);
@@ -58,10 +63,11 @@ body {
     align-items: center;
     justify-content: space-between; 
     color: var(--darkerlight);
-    margin-left: 10px;
     padding-left: 10px;
     cursor: pointer;
+    margin-left: 10px;
     margin-right: 20px;
+    margin-bottom: 10px;
     transition: 0.2s;
 }
 
@@ -79,4 +85,11 @@ body {
 
 .nav-item:hover .delete-button {
     display: block;
+}
+
+/* Tasks */
+.task-container {
+    height: 100vh;
+    width: 88vw;
+    background: red;
 }

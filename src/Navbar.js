@@ -15,6 +15,10 @@ function renderNavbar() {
   navProject.textContent = "Project";
   navbar.appendChild(navProject);
 
+  const navProject2 = document.createElement("div");
+  navProject2.classList.add("nav-item");
+  navProject2.textContent = "Univeristy";
+  navbar.appendChild(navProject2);
 
   // TODO: fix the delete button
   // const deleteButton = document.createElement("button");
