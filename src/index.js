@@ -1,6 +1,6 @@
 import "./styles.css"
 import { renderNavbar } from "./Navbar"
-import { renderTask } from "./Task";
+import { renderMainContent } from "./MainContent";
 
 renderNavbar();
-renderTask();
+renderMainContent();
