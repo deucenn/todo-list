@@ -2,7 +2,7 @@ function renderMainContent() {
     const content = document.getElementById("content");
 
     const mainContent = document.createElement("div");
-    mainContent.classList.add("main-content");
+    mainContent.classList.add("task-container");
     content.appendChild(mainContent);
 
     const mainTitle = document.createElement("h2");
