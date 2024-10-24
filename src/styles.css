@@ -5,7 +5,7 @@
 :root {
   --orange: #a08437;
   --dark: #181818;
-  --lightdark: #1f1f1f; 
+  --lightdark: #1f1f1f;
   --hover: #3a3a3a;
   --light: #e0e0e0;
   --darkerlight: #919191;
@@ -30,63 +30,89 @@
 
 body {
   /* overflow: hidden; */
-  background: var(--dark)
+  background: var(--dark);
 }
 
 #content {
-    display: grid;
-    height: 100vh;
-    grid-template-columns: 1fr 10fr;
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 1fr 10fr;
 }
 
 /* Navbar */
 .navbar {
-    background: var(--lightdark);
-    /* height: 100vh;
+  background: var(--lightdark);
+  /* height: 100vh;
     width: 12vw; */
-    border-right: 1px solid var(--darkerlight);
+  border-right: 1px solid var(--darkerlight);
 }
 
 .app-name {
-    color: var(--light);
-    text-align: left;
-    margin-left: 20px;
-    font-weight: 400;
-    font-size: large;
-    margin-bottom: 40px;
+  color: var(--light);
+  text-align: left;
+  margin-left: 20px;
+  font-weight: 400;
+  font-size: large;
+  margin-bottom: 40px;
 }
 
 .nav-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; 
-    color: var(--darkerlight);
-    padding-left: 10px;
-    cursor: pointer;
-    margin-left: 10px;
-    margin-right: 20px;
-    margin-bottom: 10px;
-    transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--darkerlight);
+  padding-left: 10px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  transition: 0.2s;
 }
 
 .nav-item:hover {
-    background: var(--hover);
-    border-radius: 5px;
+  background: var(--hover);
+  border-radius: 5px;
 }
 
 .delete-button {
-    display: none;
-    color: white;
-    border: none;
-    cursor: pointer;
+  display: none;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .nav-item:hover .delete-button {
-    display: block;
+  display: block;
 }
 
 /* Tasks */
 .task-container {
+  color: var(--light);
+  padding: 20px;
+}
 
-    background: red;
+.task {
+  padding: 20px;
+  transition: 200ms;
+  cursor: pointer;
+}
+
+.task:hover {
+  background-color: var(--hover);
+  border-radius: 10px;
+}
+
+.task-delete-btn {
+  position: absolute;
+  right: 50px;
+  background: transparent;
+  border: 0;
+  color: var(--light);
+  font-size: large;
+  padding: 5px 10px 5px 5px;
+}
+
+.task-delete-btn:hover {
+    background: var(--lightdark);
+    border-radius: 100%;
 }
