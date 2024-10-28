@@ -1,8 +1,12 @@
+import Project from "./modules/Project";
+import Task from "./modules/Task";
+import ToDoList from "./modules/ToDoList";
+
 function renderMainContent() {
   const content = document.getElementById("content");
 
   const mainContent = document.createElement("div");
-  mainContent.classList.add("task-container");
+  mainContent.classList.add("task-container", "blurred"); // Blur Opt-In
   content.appendChild(mainContent);
 
   const mainTitle = document.createElement("h2");
@@ -21,6 +25,9 @@ function renderMainContent() {
   const addTaskButton = document.createElement("button");
   addTaskButton.classList.add("add-task-button");
   addTaskButton.textContent = "+ Add Task";
+  addTaskButton.addEventListener("click", () => {
+
+  })
   contentArea.appendChild(addTaskButton);
 
   const task1 = document.createElement("div");

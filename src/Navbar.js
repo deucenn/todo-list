@@ -2,7 +2,7 @@ function renderNavbar() {
   const content = document.getElementById("content");
 
   const navbar = document.createElement("div");
-  navbar.classList.add("navbar");
+  navbar.classList.add("navbar", "blurred"); // Blur Opt-In
   content.appendChild(navbar);
 
   const appName = document.createElement("h1");
