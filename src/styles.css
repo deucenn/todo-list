@@ -84,6 +84,27 @@ body {
   display: block;
 }
 
+.create-project-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--light);
+  background-color: var(--darkerlight);
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  transition: 200ms ease-in-out;
+}
+
+.create-project-btn:hover {
+  background-color: var(--hover);
+  color: var(--light)
+}
+
 /* Tasks */
 .task-container {
   color: var(--light);

@@ -7,13 +7,27 @@ export default class Storage {
     localStorage.setItem("ToDoList", JSON.stringify(data));
   }
 
-  static loadToDoList() {
-    const savedData = localStorage.getItem("ToDoList");
-    if (savedData) {
-      return JSON.parse(savedData);
-    } else {
-      return new ToDoList();
-    }
+  static getToDoList() {
+    const toDoList = Object.assign(
+      new ToDoList(),
+      JSON.parse(localStorage.getItem("todoList"))
+    );
+
+    toDoList.setProjects(
+      toDoList
+        .getProjects()
+        .map((project) => Object.assign(new Project(), project))
+    );
+
+    toDoList
+      .getProjects()
+      .forEach((project) =>
+        project.setTasks(
+          project.getTasks().map((task) => Object.assign(new Task(), task))
+        )
+      );
+
+    return toDoList;
   }
 
   static addProject(project) {
