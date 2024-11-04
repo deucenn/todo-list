@@ -4,13 +4,13 @@ import ToDoList from "./ToDoList";
 
 export default class Storage {
   static saveToDoList(data) {
-    localStorage.setItem("ToDoList", JSON.stringify(data));
+    localStorage.setItem("toDoList", JSON.stringify(data));
   }
 
   static getToDoList() {
     const toDoList = Object.assign(
       new ToDoList(),
-      JSON.parse(localStorage.getItem("todoList"))
+      JSON.parse(localStorage.getItem("toDoList"))
     );
 
     toDoList.setProjects(

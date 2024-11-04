@@ -115,11 +115,14 @@ body {
 }
 
 .project-input {
-  width: max-content;
-  padding: 10px;
+  max-width: 100px;
+  padding: 5px;
   border-radius: 5px;
   margin-right: 10px;
   margin-bottom: 10px;
+  background-color: var(--lightdark);
+  border: none;
+  color: var(--darkerlight)
 }
 
 /* Tasks */

@@ -5,10 +5,90 @@ import Storage from "./modules/Storage";
 
 export default class UI {
   static loadHomepage() {
+    UI.loadContent();
     UI.loadProjects();
   }
 
   static loadProjects() {
+    Storage.getToDoList()
+      .getProjects()
+      .forEach((project) => {
+        if (project.name !== "Work") {
+          UI.createProject(project.name);
+        }
+      });
+  }
+
+  static loadTasks(projectName) {
+    Storage.getToDoList()
+      .getProject(projectName)
+      .getTasks()
+      .forEach((task) => {
+        UI.createTask(task.title);
+      });
+  }
+
+  static createProject(name) {
+    const navProject = document.createElement("div");
+    navProject.classList.add("nav-item");
+    navProject.textContent = name;
+    document.querySelector(".navbar").appendChild(navProject);
+  }
+
+  static createTask(title) {}
+
+  static loadModal() {
+    const content = document.getElementById("content");
+
+    const modalDiv = document.createElement("div");
+    modalDiv.classList.add("modal", "active");
+
+    const modalTitle = document.createElement("h2");
+    modalTitle.classList.add("modal-title");
+    modalTitle.textContent = "Add New Task";
+
+    const modalTask = document.createElement("input");
+    modalTask.classList.add("modal-task");
+    modalTask.type = "text";
+    modalTask.required = true;
+    modalTask.placeholder = "Task";
+
+    const modalSave = document.createElement("button");
+    modalSave.classList.add("modal-save", "modal-button");
+    modalSave.textContent = "Save";
+
+    const modalQuit = document.createElement("button");
+    modalQuit.classList.add("modal-quit", "modal-button");
+    modalQuit.textContent = "Quit";
+
+    modalSave.addEventListener("click", () => {
+      const taskTitle = modalTask.value.trim();
+      if (taskTitle) {
+        const newTask = new Task(taskTitle);
+
+        const activeProjectName = "YourActiveProjectName"; // Anpassen
+        Storage.addTask(activeProjectName, newTask);
+
+        UI.createTask(taskTitle);
+
+        content.removeChild(modalDiv);
+        document.querySelector(".task-container").classList.remove("blurred");
+      }
+    });
+
+    modalQuit.addEventListener("click", () => {
+      content.removeChild(modalDiv);
+      document.querySelector(".task-container").classList.remove("blurred");
+    });
+
+    content.appendChild(modalDiv);
+    modalDiv.appendChild(modalTitle);
+    modalDiv.appendChild(modalTask);
+    modalDiv.appendChild(modalSave);
+    modalDiv.appendChild(modalQuit);
+  }
+
+  static loadContent() {
     const content = document.getElementById("content");
 
     const navbar = document.createElement("div");
@@ -30,7 +110,7 @@ export default class UI {
 
     const projectInput = document.createElement("input");
     projectInput.setAttribute("type", "text");
-    projectInput.setAttribute("placeholder", "New Project Name");
+    projectInput.setAttribute("placeholder", "Project Name");
     projectInput.classList.add("project-input");
 
     const saveProjectBtn = document.createElement("button");
@@ -46,11 +126,24 @@ export default class UI {
       projectInput.focus();
     });
 
+    // saveProjectBtn.addEventListener("click", () => {
+    //   const projectName = projectInput.value.trim();
+    //   if (projectName) {
+    //     UI.createProject(projectName);
+    //     Storage.getToDoList().addProject(projectName);
+    //     projectInput.value = "";
+    //     projectInputContainer.style.display = "none";
+    //   }
+    // });
+
     saveProjectBtn.addEventListener("click", () => {
       const projectName = projectInput.value.trim();
       if (projectName) {
         UI.createProject(projectName);
-        Storage.getToDoList().addProject(projectName);
+
+        const newProject = new Project(projectName);
+        Storage.addProject(newProject);
+
         projectInput.value = "";
         projectInputContainer.style.display = "none";
       }
@@ -62,18 +155,35 @@ export default class UI {
     navbar.appendChild(createProjectBtn);
     navbar.appendChild(projectInputContainer);
 
-    // Load projects from local storage
-    Storage.getToDoList()
-      .getProjects()
-      .forEach((project) => {
-        UI.createProject(project.name);
-      });
-  }
+    const mainContent = document.createElement("div");
+    mainContent.classList.add("task-container"); // Blur Opt-In
+    content.appendChild(mainContent);
 
-  static createProject(name) {
-    const navProject = document.createElement("div");
-    navProject.classList.add("nav-item");
-    navProject.textContent = name;
-    document.querySelector(".navbar").appendChild(navProject);
+    const mainTitle = document.createElement("h2");
+    mainTitle.classList.add("top-bar");
+    mainTitle.textContent = "Project";
+    mainContent.appendChild(mainTitle);
+
+    const contentArea = document.createElement("div");
+    contentArea.classList.add("content-area");
+    mainContent.appendChild(contentArea);
+
+    const taskListArea = document.createElement("div");
+    taskListArea.classList.add("task-list");
+    contentArea.appendChild(taskListArea);
+
+    const addTaskButton = document.createElement("button");
+    addTaskButton.classList.add("add-task-button");
+    addTaskButton.textContent = "+ Add Task";
+    addTaskButton.addEventListener("click", () => {
+      UI.loadModal();
+      mainContent.classList.add("blurred");
+    });
+    contentArea.appendChild(addTaskButton);
+
+    const task1 = document.createElement("div");
+    task1.classList.add("task");
+    task1.textContent = "Task 1";
+    taskListArea.appendChild(task1);
   }
 }
