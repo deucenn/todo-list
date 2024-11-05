@@ -31,26 +31,36 @@ export default class Storage {
   }
 
   static addProject(project) {
-    const toDoList = Storage.loadToDoList();
+    const toDoList = Storage.getToDoList();
     toDoList.addProject(project);
     Storage.saveToDoList(toDoList);
   }
 
   static deleteProject(projectName) {
-    const toDoList = Storage.loadToDoList();
+    const toDoList = Storage.getToDoList();
     toDoList.deleteProject(projectName);
     Storage.saveToDoList(toDoList);
   }
 
   static addTask(projectName, task) {
-    const toDoList = Storage.loadToDoList();
-    toDoList.getProject(projectName).addTask(task);
-    Storage.saveToDoList(toDoList);
+    const toDoList = Storage.getToDoList();
+    const project = toDoList.getProject(projectName);
+    if (project) {
+      project.addTask(task);
+      Storage.saveToDoList(toDoList);
+    } else {
+      console.error(`Project "${projectName}" not found.`);
+    }
   }
 
   static deleteTask(projectName, task) {
-    const toDoList = Storage.loadToDoList();
-    toDoList.getProject(projectName).deleteTask(task);
-    Storage.saveToDoList(toDoList);
+    const toDoList = Storage.getToDoList();
+    const project = toDoList.getProject(projectName);
+    if (project) {
+      project.deleteTask(task);
+      Storage.saveToDoList(toDoList);
+    } else {
+      console.error(`Project "${projectName}" not found.`);
+    }
   }
 }
