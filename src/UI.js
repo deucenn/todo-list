@@ -24,7 +24,7 @@ export default class UI {
       .getProject(projectName)
       .getTasks()
       .forEach((task) => {
-        UI.createTask(task.title);
+        UI.createTask(task.name);
       });
   }
 
@@ -35,7 +35,12 @@ export default class UI {
     document.querySelector(".navbar").appendChild(navProject);
   }
 
-  static createTask(title) {}
+  static createTask(title) {
+    const taskItem = document.createElement("div");
+    taskItem.classList.add("task");
+    taskItem.textContent = title;
+    document.querySelector(".task-list").appendChild(taskItem);
+  }
 
   static loadModal() {
     const content = document.getElementById("content");
@@ -66,7 +71,7 @@ export default class UI {
       if (taskTitle) {
         const newTask = new Task(taskTitle);
 
-        const activeProjectName = "YourActiveProjectName"; // Anpassen
+        const activeProjectName = modalTask.value; // Anpassen
         Storage.addTask(activeProjectName, newTask);
 
         UI.createTask(taskTitle);
@@ -98,12 +103,10 @@ export default class UI {
     appName.classList.add("app-name");
     appName.textContent = "Notedock";
 
-    // Create "Create Project" button
     const createProjectBtn = document.createElement("button");
     createProjectBtn.classList.add("create-project-btn");
     createProjectBtn.textContent = "Create Project";
 
-    // Project input field and save button (initially hidden)
     const projectInputContainer = document.createElement("div");
     projectInputContainer.classList.add("project-input-container");
     projectInputContainer.style.display = "none"; // Start hidden
@@ -126,15 +129,7 @@ export default class UI {
       projectInput.focus();
     });
 
-    // saveProjectBtn.addEventListener("click", () => {
-    //   const projectName = projectInput.value.trim();
-    //   if (projectName) {
-    //     UI.createProject(projectName);
-    //     Storage.getToDoList().addProject(projectName);
-    //     projectInput.value = "";
-    //     projectInputContainer.style.display = "none";
-    //   }
-    // });
+
 
     saveProjectBtn.addEventListener("click", () => {
       const projectName = projectInput.value.trim();
@@ -149,7 +144,6 @@ export default class UI {
       }
     });
 
-    // Append elements to the navbar
     content.appendChild(navbar);
     navbar.appendChild(appName);
     navbar.appendChild(createProjectBtn);
@@ -181,9 +175,5 @@ export default class UI {
     });
     contentArea.appendChild(addTaskButton);
 
-    const task1 = document.createElement("div");
-    task1.classList.add("task");
-    task1.textContent = "Task 1";
-    taskListArea.appendChild(task1);
   }
 }
