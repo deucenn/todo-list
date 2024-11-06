@@ -7,6 +7,7 @@ export default class UI {
   static loadHomepage() {
     UI.loadContent();
     UI.loadProjects();
+    UI.loadTasks();
   }
 
   static loadProjects() {
@@ -135,9 +136,7 @@ export default class UI {
       const projectName = projectInput.value.trim();
       if (projectName) {
         UI.createProject(projectName);
-
-        const newProject = new Project(projectName);
-        Storage.addProject(newProject);
+        Storage.addProject(projectName);
 
         projectInput.value = "";
         projectInputContainer.style.display = "none";
