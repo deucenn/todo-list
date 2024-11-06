@@ -3,6 +3,8 @@ import Task from "./modules/Task";
 import ToDoList from "./modules/ToDoList";
 import Storage from "./modules/Storage";
 
+let activeProjectName = ""; // Default project
+
 export default class UI {
   static loadHomepage() {
     UI.loadContent();
@@ -14,13 +16,14 @@ export default class UI {
     Storage.getToDoList()
       .getProjects()
       .forEach((project) => {
-        if (project.name !== "Work") {
           UI.createProject(project.name);
-        }
       });
   }
 
   static loadTasks(projectName) {
+    const taskListArea = document.querySelector(".task-list");
+    taskListArea.innerHTML = "";
+
     Storage.getToDoList()
       .getProject(projectName)
       .getTasks()
@@ -33,6 +36,12 @@ export default class UI {
     const navProject = document.createElement("div");
     navProject.classList.add("nav-item");
     navProject.textContent = name;
+
+    navProject.addEventListener("click", () => {
+      UI.loadTasks(name);
+      document.querySelector(".top-bar").textContent = name;
+      activeProjectName = name;
+    });
     document.querySelector(".navbar").appendChild(navProject);
   }
 
@@ -71,12 +80,9 @@ export default class UI {
       const taskTitle = modalTask.value.trim();
       if (taskTitle) {
         const newTask = new Task(taskTitle);
-
-        const activeProjectName = modalTask.value; // Anpassen
-        Storage.addTask(activeProjectName, newTask);
+        Storage.addTask(activeProjectName, newTask); 
 
         UI.createTask(taskTitle);
-
         content.removeChild(modalDiv);
         document.querySelector(".task-container").classList.remove("blurred");
       }
@@ -130,8 +136,6 @@ export default class UI {
       projectInput.focus();
     });
 
-
-
     saveProjectBtn.addEventListener("click", () => {
       const projectName = projectInput.value.trim();
       if (projectName) {
@@ -173,6 +177,5 @@ export default class UI {
       mainContent.classList.add("blurred");
     });
     contentArea.appendChild(addTaskButton);
-
   }
 }
